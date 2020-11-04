@@ -1,6 +1,5 @@
 ﻿@inherits DatePickerComponentBase
 
-
 <div class="@ClassName" style="@MainStyle">
 	<div class="@ContentClassName">
 		@if (ViewMode == ViewMode.Days)
@@ -28,15 +27,7 @@
 						}
 					</div>
 				}
-				@*@if (DisplayWeekNumber)
-				{
-					<div class="week-numbers">
-						@foreach (var week in GetWeeks)
-						{
-							<div class="week-number">@week</div>
-						}
-					</div>
-				}*@
+
 				<div class="days">
 					@foreach (var date in Days)
 					{
@@ -47,6 +38,7 @@
 						</div>
 					}
 				</div>
+
 				@if (ShowToday || ShowClear || ShowClose)
 				{
 					<div class="datepicker-footer">

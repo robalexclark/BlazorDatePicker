@@ -1,155 +1,136 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace BlazorDatePicker
 {
-	internal static class CssClassGenerator
-	{
-		const string datepicker_prefix = "datepicker";
-		const string timepicker_prefix = "timepicker";
-		const string datetimepicker_prefix = "datetimepicker";
+    internal static class CssClassGenerator
+    {
+        const string datepicker_prefix = "datepicker";
+        const string timepicker_prefix = "timepicker";
+        const string datetimepicker_prefix = "datetimepicker";
 
-		/// <summary>The value of the class attribute for the root html element of the DatePicker.</summary>
-		/// <param name="inline">Whether the DatePicker is being displayed inline or not.</param>
-		/// <returns></returns>
-		internal static string DatePickerMain(bool inline)
-		{
-			var str = datepicker_prefix;
-			if (inline == false)
-				str += $" {datepicker_prefix}-dropdown-menu";
-			
-			return str;
-		}
+        /// <summary>The value of the class attribute for the root html element of the DatePicker.</summary>
+        /// <param name="inline">Whether the DatePicker is being displayed inline or not.</param>
+        /// <returns></returns>
+        internal static string DatePickerMain(bool inline)
+        {
+            var str = datepicker_prefix;
+            if (inline == false)
+                str += $" {datepicker_prefix}-dropdown-menu";
 
-		internal static string DatePickerContent(bool displayWeekNumbers)
-		{
-			var str = "datepicker-content";
-			if (displayWeekNumbers == true)
-				str += " datepicker-content-show-week-numbers";
+            return str;
+        }
 
-			return str;
-		}
+        internal static string DatePickerContent(bool displayWeekNumbers)
+        {
+            var str = "datepicker-content";
+            if (displayWeekNumbers == true)
+                str += " datepicker-content-show-week-numbers";
 
-		/// <summary>The value of the class attribute for the Day element.</summary>
-		/// <param name="Date">The day to render.</param>
-		/// <param name="State"></param>
-		/// <returns></returns>
-		internal static string Day(DateTime Date, DatePickerComponentBase State)
-		{
-			bool disabled = State.IsDayDisabled(Date);
-			bool isToday = Date == State.Today;
-			bool isOld = Date.Month < State.MonthToDisplay.Month;
-			bool isNew = Date.Month > State.MonthToDisplay.Month;
+            return str;
+        }
 
-			var sb = new List<string>
-			{
-				"day",
-				Date.DayOfWeek.IsWeekday() ? "weekday" : "weekend"
-			};
+        /// <summary>The value of the class attribute for the Day element.</summary>
+        /// <param name="Date">The day to render.</param>
+        /// <param name="State"></param>
+        /// <returns></returns>
+        internal static string Day(DateTime Date, DatePickerComponentBase State)
+        {
+            bool disabled = State.IsDayDisabled(Date);
+            bool isToday = Date == State.Today;
+            bool isOld = Date.Month < State.MonthToDisplay.Month;
+            bool isNew = Date.Month > State.MonthToDisplay.Month;
 
-			if (isOld)
-				sb.Add("old");
-			if (isNew)
-				sb.Add("new");
-			if (isToday)
-				sb.Add("today");
-			if (State.SelectedDate == Date)
-				sb.Add("active");
-			if (disabled)
-				sb.Add("disabled");
+            var sb = new List<string>
+            {
+                "day",
+                Date.DayOfWeek.IsWeekday() ? "weekday" : "weekend"
+            };
 
-			return string.Join(" ", sb);
-		}
+            if (isOld)
+                sb.Add("old");
+            if (isNew)
+                sb.Add("new");
+            if (isToday)
+                sb.Add("today");
+            if (State.SelectedDate == Date)
+                sb.Add("active");
+            if (disabled)
+                sb.Add("disabled");
 
-		internal static string DayOfWeek(DayOfWeek dayOfWeek, IEnumerable<DayOfWeek> daysOfWeekDisabled)
-		{
-			var strClass = "dow";
-			if (dayOfWeek.IsWeekday())
-				strClass += " weekday";
-			else
-				strClass += " weekend";
+            return string.Join(" ", sb);
+        }
 
-			if (daysOfWeekDisabled != null)
-			{
-				if (daysOfWeekDisabled.Contains(dayOfWeek))
-					strClass += " disabled";
-			}
+        internal static string DayOfWeek(DayOfWeek dayOfWeek, IEnumerable<DayOfWeek> daysOfWeekDisabled)
+        {
+            var strClass = "dow";
+            if (dayOfWeek.IsWeekday())
+                strClass += " weekday";
+            else
+                strClass += " weekend";
 
-			return strClass;
-		}
+            if (daysOfWeekDisabled != null)
+            {
+                if (daysOfWeekDisabled.Contains(dayOfWeek))
+                    strClass += " disabled";
+            }
 
-		internal static string Month(int month, bool disabled, DatePickerComponentBase state)
-		{
-			var strClass = "month";
+            return strClass;
+        }
 
-			// Disabled
-			if (disabled)
-				strClass += " disabled";
+        internal static string Month(int month, bool disabled, DatePickerComponentBase state)
+        {
+            var strClass = "month";
 
-			// Active
-			if ((state.SelectedMonth.HasValue && month == state.SelectedMonth.Value)
-				&& (state.SelectedYear == state.MonthToDisplay.Year))
-				strClass += " active";
+            // Disabled
+            if (disabled)
+                strClass += " disabled";
 
-			return strClass;
-		}
+            // Active
+            if ((state.SelectedMonth.HasValue && month == state.SelectedMonth.Value)
+                && (state.SelectedYear == state.MonthToDisplay.Year))
+                strClass += " active";
 
-		internal static string Year(int year, bool disabled, DatePickerComponentBase state)
-		{
-			var (start, end) = state.MonthToDisplay.GetDecade();
-			var strClass = "year";
+            return strClass;
+        }
 
-			if (disabled)
-				strClass += " disabled";
+        internal static string Year(int year, bool disabled, DatePickerComponentBase state)
+        {
+            var (start, end) = state.MonthToDisplay.GetDecade();
+            var strClass = "year";
 
-			if (state.SelectedYear.HasValue && year == state.SelectedYear.Value)
-				strClass += " active";
-			
-			if (year < start)
-				strClass += " old";
-			else if (year > end)
-				strClass += " new";
+            if (disabled)
+                strClass += " disabled";
 
-			return strClass;
-		}
+            if (state.SelectedYear.HasValue && year == state.SelectedYear.Value)
+                strClass += " active";
 
-		internal static string Decade(int decade, bool disabled, DatePickerComponentBase state)
-		{
-			var (start, end) = state.MonthToDisplay.GetCentury();
-			var strClass = "decade";
+            if (year < start)
+                strClass += " old";
+            else if (year > end)
+                strClass += " new";
 
-			if (state.SelectedDecade.HasValue && decade == state.SelectedDecade.Value)
-				strClass += " active";
+            return strClass;
+        }
 
-			if (disabled)
-				strClass += " disabled";
+        internal static string Decade(int decade, bool disabled, DatePickerComponentBase state)
+        {
+            var (start, end) = state.MonthToDisplay.GetCentury();
+            var strClass = "decade";
 
-			if (decade < start)
-				strClass += " old";
-			else if (decade > end)
-				strClass += " new";
+            if (state.SelectedDecade.HasValue && decade == state.SelectedDecade.Value)
+                strClass += " active";
 
-			return strClass;
-		}
-		
-		internal static string TimePickerMain(bool inline)
-		{
-			var str = timepicker_prefix;
-			if (inline == false)
-				str += $" {timepicker_prefix}-dropdown-menu";
+            if (disabled)
+                strClass += " disabled";
 
-			return str;
-		}
+            if (decade < start)
+                strClass += " old";
+            else if (decade > end)
+                strClass += " new";
 
-		internal static string DateTimePickerMain(bool inline)
-		{
-			var str = datetimepicker_prefix;
-			if (inline == false)
-				str += $" {datetimepicker_prefix}-dropdown-menu";
-
-			return str;
-		}
-	}
+            return strClass;
+        }
+    }
 }

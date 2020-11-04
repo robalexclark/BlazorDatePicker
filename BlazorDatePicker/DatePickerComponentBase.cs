@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -808,30 +806,6 @@ namespace BlazorDatePicker
 				start = start.AddDays(1);
 			} while (start <= end);
 		}
-
-		//internal IEnumerable<int> GetWeeks
-		//{
-		//	get
-		//	{
-		//		if (Days != null && Days.Count() > 0)
-		//		{
-		//			int i = 0;
-		//			foreach (var day in Days)
-		//			{
-		//				if (i % 7 == 0)
-		//				{
-		//					yield return NodaTime.Calendars.WeekYearRules.Iso.GetWeekOfWeekYear(day);
-		//				}
-
-		//				i++;
-		//			}
-		//		}
-		//		else
-		//		{
-		//			yield break;
-		//		}
-		//	}
-		//}
 
 		#endregion
 

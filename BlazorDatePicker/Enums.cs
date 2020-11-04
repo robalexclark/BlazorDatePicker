@@ -14,11 +14,4 @@
 		/// <summary>Displays the decades of a single century</summary>
 		Decades
 	}
-
-	internal enum TimeViewMode
-	{
-		Clock = 0,
-		Hours = 1,
-		Minutes = 2
-	}
 }

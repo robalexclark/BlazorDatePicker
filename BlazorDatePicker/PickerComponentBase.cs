@@ -13,7 +13,7 @@ namespace BlazorDatePicker
 		/// <summary>The maximum width of the wrapper element. Must be a valid CSS width value.</summary>
 		[Parameter] public string MaxWidth { get; set; }
 		/// <summary>The width of the wrapper element. Must be a valid CSS width value.</summary>
-		[Parameter] public string Width { get; set; } = "250px";
+		[Parameter] public string Width { get; set; }// = "250px";
 		/// <summary>If true and <see cref="Inline"/> is true, the Clear button will be displayed. If false, or <see cref="Inline"/> is false, it will be hidden.</summary>
 		[Parameter] public bool ShowClose { get; set; } = false;
 		// Parameters not yet in use
