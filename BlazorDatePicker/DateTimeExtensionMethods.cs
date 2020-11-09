@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BlazorDatePicker
+namespace RobAlexClark.BlazorDatePicker
 {
     internal static class DateTimeExtensionMethods
     {

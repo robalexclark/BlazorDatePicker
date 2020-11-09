@@ -7,12 +7,16 @@
     <RazorLangVersion>3.0</RazorLangVersion>
     <Version>0.7.0</Version>
 		<Authors>Robin Clark</Authors>
-		<PackageId>BlazorDatePicker</PackageId>
+		<PackageId>RobAlexClark.BlazorDatePicker</PackageId>
 		<Title>Blazor Date Picker</Title>
-		<Description>A Date Picker for Blazor</Description>
+		<Description>A Date Picker for Blazor based on NodaTimePicker</Description>
 		<PackageProjectUrl>https://github.com/robalexclark/BlazorDatePicker</PackageProjectUrl>
 		<PackageTags>blazor;datepicker</PackageTags>
-		<RepositoryUrl>https://github.com/robalexclark/BlazorDatePicker</RepositoryUrl>		
+		<RepositoryUrl>https://github.com/robalexclark/BlazorDatePicker</RepositoryUrl>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<RootNamespace>RobAlexClark.BlazorDatePicker</RootNamespace>
+		<AssemblyName>RobAlexClark.BlazorDatePicker</AssemblyName>
+		<PackageLicenseFile>Licence.txt</PackageLicenseFile>		
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,5 +26,12 @@
 
 	<ItemGroup>		
 		<EmbeddedResource Include="wwwroot\**\*.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />		
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="Licence.txt">
+	    <Pack>True</Pack>
+	    <PackagePath></PackagePath>
+	  </None>
 	</ItemGroup>	
 </Project>

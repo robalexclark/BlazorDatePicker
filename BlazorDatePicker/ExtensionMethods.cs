@@ -1,4 +1,4 @@
-﻿namespace BlazorDatePicker
+﻿namespace RobAlexClark.BlazorDatePicker
 {
 	internal static class ExtensionMethods
 	{

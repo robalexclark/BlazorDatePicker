@@ -1,4 +1,4 @@
-﻿namespace BlazorDatePicker
+﻿namespace RobAlexClark.BlazorDatePicker
 {
 	/// <summary>Represents the type of view to display.</summary>
 	public enum ViewMode
